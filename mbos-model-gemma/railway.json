@@ -1,0 +1,29 @@
+{
+  "services": {
+    "mbos-model-gemma": {
+      "build": {
+        "builder": "dockerfile",
+        "dockerfilePath": "./mbos-model-gemma/Dockerfile"
+      },
+      "startCommand": "uvicorn mbos-model-gemma.main:app --host 0.0.0.0 --port 8000",
+      "ports": [
+        {
+          "port": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "env": {
+        "RAILWAY_MODEL_URL": "https://mbos-model-gemma.up.railway.app"
+      },
+      "healthcheck": {
+        "path": "/health",
+        "port": 8000,
+        "type": "http",
+        "interval": 30000,
+        "timeout": 3000,
+        "retries": 3,
+        "startPeriod": 5000
+      }
+    }
+  }
+}

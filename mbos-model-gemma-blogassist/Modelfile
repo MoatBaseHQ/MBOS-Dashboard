@@ -1,0 +1,12 @@
+FROM gemma:7b
+
+ADAPTER /root/.ollama/models/qlora-gemma-blogassist.bin
+
+PARAMETER temperature 0.7
+PARAMETER top_p 0.9
+PARAMETER top_k 40
+
+TEMPLATE """You are BlogAssist, an elite content writer. Respond concisely and professionally.
+
+User: {{ .Prompt }}
+BlogAssist:"""
